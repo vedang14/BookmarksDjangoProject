@@ -29,11 +29,17 @@ variable = {
 var2 = {'template': 'registration/register_success.html'}
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
+    #Browsing Pages
     url(r'^$',main_page),
     url(r'^user/(\w+)/$', user_page),
+    
+    #Session Management
     url(r'^login/$',login,name='login'),
     url(r'^logout/$',logout_page),
     url(r'^site_media/(?P<path>.*)$',serve,variable),
     url(r'^register/$',register_page),
     url(r'^register/success/$', TemplateView.as_view(template_name ='registration/register_success.html'),var2),
+    
+    #Account Management
+    url(r'^save/$',bookmarks_save_page)
 ]

@@ -33,7 +33,7 @@ class RegistrationForm(forms.Form):
             return username
         raise forms.ValidationError('Username is already taken.')
 
-class BoookmarksSaveForm(forms.Form):
+class BookmarkSaveForm(forms.Form):
     url = forms.URLField(
         label = 'URL',
         widget = forms.TextInput(attrs={'size':64} )
