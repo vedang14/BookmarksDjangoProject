@@ -14,13 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 import os.path 
-from django.conf.urls import url
+from django.conf.urls import url,include
 from django.contrib import admin
 from django.contrib.auth.views import login
 from bookmarks.views import *
-from bookmarks.views import *
 from django.views.static import serve
 from django.views.generic import TemplateView
+from django.contrib import admin
+admin.autodiscover()
 
 site_media = os.path.join(os.path.dirname(__file__),'site_media')
 variable = {
@@ -39,7 +40,14 @@ urlpatterns = [
     url(r'^site_media/(?P<path>.*)$',serve,variable),
     url(r'^register/$',register_page),
     url(r'^register/success/$', TemplateView.as_view(template_name ='registration/register_success.html'),var2),
-    
+    url(r'^tag/([^\s]+)/$',tag_page),
+    url(r'^tag/$',tag_cloud_page),
+    url(r'^search/$',search_pages),
+    url(r'^ajax/tag/autocomplete/$',ajax_tag_autocomplete),
+
     #Account Management
-    url(r'^save/$',bookmarks_save_page)
+    url(r'^save/$',bookmarks_save_page),
+
+    #Admin Interface
+    url(r'^admin/',include(admin.site.urls)),
 ]
